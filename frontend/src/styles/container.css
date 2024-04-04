@@ -1,0 +1,36 @@
+.container-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px;
+}
+
+.container {
+    width: 100%;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+}
+
+.add-task-button {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+
+    font-weight: 300;
+    font-size: 12px;
+    gap: 10px;
+
+    cursor: pointer;
+
+    filter: brightness(0) saturate(100%) invert(53%) sepia(11%) saturate(23%) hue-rotate(315deg) brightness(93%) contrast(93%);
+    transition: all 0.3s;
+}
+
+.add-task-button:hover{
+    filter: brightness(0) saturate(100%) invert(12%) sepia(23%) saturate(13%) hue-rotate(315deg) brightness(97%) contrast(94%);
+}

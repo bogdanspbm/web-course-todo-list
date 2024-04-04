@@ -1,0 +1,97 @@
+.new-task {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    border-radius: 10px;
+    background: white;
+    height: fit-content;
+
+    border: #F0F0F0 1px solid;
+}
+
+.new-task-container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+
+    padding: 12px;
+
+    gap: 6px;
+}
+
+.new-task-footer {
+    display: flex;
+    flex-direction: row;
+
+
+    align-items: stretch;
+
+    gap: 8px;
+
+    height: 28px;
+    padding: 12px;
+    border-top: #F0F0F0 1px solid;
+}
+
+.invisible-input {
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+.title-input {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.desc-input {
+    font-size: 12px;
+    line-height: 14px;
+    max-width: 100%;
+    resize: none;
+}
+
+input[type=date] {
+    background: transparent;
+    border-radius: 4px;
+    outline: none;
+    color: #868686;
+    border: 1px solid #F0F0F0;
+}
+
+select {
+    cursor: pointer;
+    background: transparent;
+    border-radius: 4px;
+    outline: none;
+    color: #868686;
+    border: 1px solid #F0F0F0;
+}
+
+input[type=date]:hover {
+    background: #F3F3F3;
+    cursor: pointer;
+}
+
+.button-primary {
+    background: #52c41a;
+    color: white;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    width: 128px;
+
+    cursor: pointer;
+}
+
+.button-secondary {
+    background: white;
+    border: 1px solid #F0F0F0;
+
+    width: 78px;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+}

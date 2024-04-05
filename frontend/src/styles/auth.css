@@ -1,0 +1,37 @@
+#registrationForm {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #F0F0F0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+}
+
+input {
+    border: none;
+    outline: none;
+    height: 26px;
+    border-radius: 4px;
+    padding: 4px;
+    background: #F5F5F5;
+}
+
+label {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+button {
+    border: none;
+    outline: none;
+    height: 36px;
+    border-radius: 4px;
+    background: #52c41a;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #73d13d;
+}

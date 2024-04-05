@@ -8,6 +8,8 @@
     background: white;
     height: fit-content;
 
+    overflow: hidden;
+
     border: #F0F0F0 1px solid;
 }
 

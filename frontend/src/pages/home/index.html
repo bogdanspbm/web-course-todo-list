@@ -28,25 +28,26 @@
         <div class="add-task-button"><img alt="Создать" class="nav-icon" src="../../resources/icons/ic_add_24x24.svg">
             Добавить задачу
         </div>
-        <form class="new-task">
+        <form style="display: none;" class="new-task">
             <div class="new-task-container">
-                <input class="title-input invisible-input" type="text" placeholder="Название задачи">
-                <textarea maxLength="200" style="height: 14px"
+                <input id="title" class="title-input invisible-input" type="text" placeholder="Название задачи">
+                <textarea id="desc" maxLength="200" style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                           class="desc-input invisible-input" placeholder="Описание"></textarea>
             </div>
             <div class="new-task-footer">
-                <input onchange="this.style.color = '#242424';" style="width: 128px;" onclick="this.showPicker()"
+                <input id="date" onchange="this.style.color = '#242424';" style="width: 128px;"
+                       onclick="this.showPicker()"
                        type="date">
-                <select onchange="this.style.color = '#242424';" style="width: 128px;">
+                <select id="priority" onchange="this.style.color = '#242424';" style="width: 128px;">
                     <option value="" disabled selected>Приоритет</option>
                     <option>Низкий</option>
                     <option>Средний</option>
                     <option>Высокий</option>
                 </select>
 
-                <input style="margin-left: auto;" class="button-secondary" type="reset" value="Отмена">
-                <input class="button-primary" type="submit" value="Добавить задачу">
+                <input id="cancel" style="margin-left: auto;" class="button-secondary" type="reset" value="Отмена">
+                <input id="submit" class="button-primary" type="submit" value="Добавить задачу">
             </div>
         </form>
     </div>

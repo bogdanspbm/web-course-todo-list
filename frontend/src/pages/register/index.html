@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    @import "../../styles/styles.css";
+    @import "../../styles/navigation.css";
+    @import "../../styles/container.css";
+    @import "../../styles/auth.css";
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Todo: Регистрация</title>
+</head>
+<body>
+<div class="navigation">
+</div>
+<div class="container-wrapper">
+    <div class="container" style="max-width: 480px;">
+        <h2>Регистрация</h2>
+        <form id="registrationForm">
+            <div class="vertical-container" style="gap: 4px">
+                <label for="email">Email:</label>
+                <input placeholder="Введите почту" type="email" id="email" name="email" required>
+            </div>
+            <div class="vertical-container" style="gap: 4px">
+                <label for="password">Password:</label>
+                <input placeholder="Введите пароль" type="password" id="password" name="password" required>
+            </div>
+            <div class="vertical-container" style="gap: 4px">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input placeholder="Подтвердите пароль" type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <div></div>
+            <button type="submit">Регистрация</button>
+        </form>
+    </div>
+</div>
+</body>
+<script type="module" src="index.js"></script>
+</html>

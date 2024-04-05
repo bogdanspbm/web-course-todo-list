@@ -1,28 +1,61 @@
 import {getFirebaseAuth} from "./firebase.js";
 import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js'
 
-
 export function bindRegistrationForm() {
     const registrationForm = document.getElementById('registrationForm');
-    const auth = getFirebaseAuth();
 
     registrationForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = registrationForm['email'].value;
         const password = registrationForm['password'].value;
+        const confirmPassword = registrationForm['confirmPassword'].value;
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Registered successfully
-                const user = userCredential.user;
-                console.log(user);
-                // You can redirect to another page or perform any other actions upon successful registration
+        if (password !== confirmPassword) {
+            // Пароли не совпадают
+            console.error('Passwords do not match');
+            return;
+        }
+
+        // Отправляем запрос на регистрацию пользователя
+        fetch('http://185.47.54.162/redis/redis_auth_control.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(errorMessage);
-                // Handle errors here, e.g., display error message to the user
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Обработка ответа сервера
+                console.log(data);
+                // Вы можете выполнить дополнительные действия в зависимости от ответа сервера
+            })
+            .catch(error => {
+                console.error('Registration failed:', error);
+            });
+    });
+
+    const emailInput = registrationForm.querySelector('#email');
+    const emailError = registrationForm.querySelector('#email-error');
+
+    emailInput.addEventListener('input', () => {
+        const email = emailInput.value;
+
+        // Проверка занятости email
+        fetch('http://185.47.54.162/redis/redis_auth_control.php?email=' + encodeURIComponent(email))
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Email уже занят.") {
+                    emailError.textContent = 'Email уже занят.';
+                } else {
+                    emailError.textContent = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error checking email:', error);
             });
     });
 }

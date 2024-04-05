@@ -40,13 +40,18 @@ if (isset($response['email'])) {
     $redis->sAdd('registered_users', $response['email']);
 
     $redis->close();
-    echo json_encode(['success' => true, 'message' => 'User registered successfully']);
+
+    // Устанавливаем cookies. Здесь вы можете настроить время жизни cookies по своему усмотрению.
+    setcookie('idToken', $response['idToken'], time() + (7 * 86400 * 30), "/"); // 86400 = 1 день
+    header('Location: /homepage/');
+    exit;
 } else {
     // Возвращаем ошибку Firebase, если регистрация не удалась
     echo json_encode($response);
 }
 
-function makeFirebaseRequest($url, $payload) {
+function makeFirebaseRequest($url, $payload)
+{
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);

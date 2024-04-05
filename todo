@@ -1,0 +1,32 @@
+server {
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/todo.madzhuga.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/todo.madzhuga.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    root /var/www/html/todo;
+    index index.php index.html index.nginx-debian.html;
+    server_name todo.madzhuga.com;
+
+    location / {
+        # Попробуйте отобразить index.php, если директория или файл не найдены
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    # pass PHP scripts to FastCGI server
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        # Убедитесь, что PHP-FPM настроен на прослушивание этого сокета
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        # Дополнительные параметры FastCGI
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+
+server {
+    listen 80;
+    server_name todo.madzhuga.com;
+    return 301 https://$host$request_uri;
+}

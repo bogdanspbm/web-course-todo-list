@@ -1,8 +1,10 @@
+// login.php
 <?php
 require_once '../credentials/firebase_credentials.inc';
+require_once '../credentials/redis_credentials.inc';
 
-$token = FIREBASE_TOKEN;
-$url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={$token}";
+$apiKey = FIREBASE_TOKEN;
+$url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={$apiKey}";
 
 $requestBody = file_get_contents('php://input');
 $requestData = json_decode($requestBody, true);
@@ -19,8 +21,22 @@ $firebaseRequestBody = json_encode([
     'returnSecureToken' => true
 ]);
 
-$response = makeFirebaseRequest($url, $firebaseRequestBody);
-echo $response;
+$response = json_decode(makeFirebaseRequest($url, $firebaseRequestBody), true);
+
+if (isset($response['email'])) {
+    $redis = new Redis();
+    $redis->connect(REDIS_HOST, REDIS_PORT);
+    $redis->auth(REDIS_PASSWORD);
+
+    // Записываем время последнего входа пользователя
+    $redis->set('user_last_login:'.$response['email'], time());
+
+    $redis->close();
+    echo json_encode(['success' => true, 'message' => 'Login successful']);
+} else {
+    // Возвращаем ошибку Firebase, если вход не удался
+    echo json_encode($response);
+}
 
 function makeFirebaseRequest($url, $payload) {
     $ch = curl_init($url);

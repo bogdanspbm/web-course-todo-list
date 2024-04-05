@@ -1,6 +1,7 @@
 <?php
 
 require_once '../credentials/firebase_credentials.inc';
+require_once '../credentials/redis_credentials.inc';
 
 $token = FIREBASE_TOKEN;
 $url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={$token}";
@@ -20,8 +21,22 @@ $firebaseRequestBody = json_encode([
     'returnSecureToken' => true
 ]);
 
-$response = makeFirebaseRequest($url, $firebaseRequestBody);
-echo $response;
+$response = json_decode(makeFirebaseRequest($url, $firebaseRequestBody), true);
+
+if (isset($response['email'])) {
+    $redis = new Redis();
+    $redis->connect(REDIS_HOST, REDIS_PORT);
+    $redis->auth(REDIS_PASSWORD);
+
+    // Добавляем email пользователя в набор зарегистрированных пользователей
+    $redis->sAdd('registered_users', $response['email']);
+
+    $redis->close();
+    echo json_encode(['success' => true, 'message' => 'User registered successfully']);
+} else {
+    // Возвращаем ошибку Firebase, если регистрация не удалась
+    echo json_encode($response);
+}
 
 function makeFirebaseRequest($url, $payload) {
     $ch = curl_init($url);

@@ -16,21 +16,27 @@
 <div class="container-wrapper">
     <div class="container" style="max-width: 480px;">
         <h2>Регистрация</h2>
-        <form id="registrationForm">
+        <div class="add-task-button"><img alt="Войти" class="nav-icon" src="../../resources/icons/ic_arrow_left_alt_24x24.svg">
+            Войти в аккаунт
+        </div>
+        <form action="http://185.47.54.162/firebase/register.php" method="POST" id="registrationForm">
             <div class="vertical-container" style="gap: 4px">
                 <label for="email">Email:</label>
                 <input placeholder="Введите почту" type="email" id="email" name="email" required>
+                <sup id="email-sup">Почта уже занята</sup>
             </div>
             <div class="vertical-container" style="gap: 4px">
                 <label for="password">Password:</label>
                 <input placeholder="Введите пароль" type="password" id="password" name="password" required>
+                <sup id="pass-sup">Пароль должен состоять минимум из 8 символов</sup>
             </div>
             <div class="vertical-container" style="gap: 4px">
                 <label for="confirmPassword">Confirm Password:</label>
                 <input placeholder="Подтвердите пароль" type="password" id="confirmPassword" name="confirmPassword" required>
+                <sup id="conf-pass-sup">Пароли не совпадают</sup>
             </div>
             <div></div>
-            <button type="submit">Регистрация</button>
+            <button id="submit" type="submit">Регистрация</button>
         </form>
     </div>
 </div>

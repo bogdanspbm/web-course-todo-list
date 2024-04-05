@@ -8,6 +8,9 @@ $url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={$token}";
 $requestBody = file_get_contents('php://input');
 $requestData = json_decode($requestBody, true);
 
+header('Access-Control-Allow-Origin: *');
+
+
 if (!isset($requestData['email'])) {
     header('HTTP/1.1 400 Bad Request');
     echo json_encode(['error' => 'Email is required']);

@@ -1,3 +1,3 @@
-import {bindRegistrationForm} from "../../functions/bindRegistrationForm.js";
+import {bindRegisterForm} from "../../functions/bindRegisterForm.js";
 
-bindRegistrationForm();
+bindRegisterForm();

@@ -1,6 +1,8 @@
-// check_registration.php
 <?php
 require_once '../credentials/redis_credentials.inc';
+
+
+header('Access-Control-Allow-Origin: *');
 
 // Получаем email пользователя из запроса
 if (!isset($_GET['email'])) {

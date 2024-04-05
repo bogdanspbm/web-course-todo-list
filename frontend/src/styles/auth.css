@@ -14,7 +14,9 @@ input {
     height: 26px;
     border-radius: 4px;
     padding: 4px;
+    padding-left: 10px;
     background: #F5F5F5;
+    transition: 0.05s;
 }
 
 label {
@@ -30,6 +32,15 @@ button {
     background: #52c41a;
     color: white;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+sup {
+    color: #cf132200;
+    font-size: 8px;
+    line-height: 8px;
+    margin-bottom: -4px;
+    transition: 0.3s;
 }
 
 button:hover {

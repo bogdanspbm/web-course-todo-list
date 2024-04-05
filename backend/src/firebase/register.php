@@ -6,18 +6,26 @@ require_once '../credentials/redis_credentials.inc';
 $token = FIREBASE_TOKEN;
 $url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={$token}";
 
-$requestBody = file_get_contents('php://input');
-$requestData = json_decode($requestBody, true);
+header('Access-Control-Allow-Origin: *');
 
-if (!isset($requestData['email']) || !isset($requestData['password'])) {
+
+// Теперь данные формы доступны в $_POST массиве
+if (!isset($_POST['email']) || !isset($_POST['password'])) {
     header('HTTP/1.1 400 Bad Request');
     echo json_encode(['error' => 'Email and password are required']);
     exit;
 }
 
+// Проверка на совпадение паролей, если это требуется
+if ($_POST['password'] !== $_POST['confirmPassword']) {
+    header('HTTP/1.1 400 Bad Request');
+    echo json_encode(['error' => 'Passwords do not match']);
+    exit;
+}
+
 $firebaseRequestBody = json_encode([
-    'email' => $requestData['email'],
-    'password' => $requestData['password'],
+    'email' => $_POST['email'],
+    'password' => $_POST['password'],
     'returnSecureToken' => true
 ]);
 

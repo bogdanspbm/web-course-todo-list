@@ -30,7 +30,7 @@ nav {
     transition: all 0.3s;
 }
 
-.nav-icon{
+.nav-icon {
     height: 20px;
     width: 20px;
 }
@@ -41,4 +41,35 @@ nav {
 
 nav:hover:not(.selected) {
     background: #F3F3F3;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 4px;
+    transition: 0.3s;
+    margin-left: auto;
+}
+
+.logout-button:hover {
+    background: #F3F3F3;
+}
+
+.profile-icon {
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    background: #52c41a;
 }

@@ -55,8 +55,9 @@ if (array_key_exists($requestPath, $routes)) {
     echo "<h1>404 Page Not Found</h1>";
 }
 
+
 function isTokenValid($token) {
-    $url = "/api/firebase/check_token.php?token=" . urlencode($token);
+    $url = "https://todo.madzhuga.com/api/firebase/check_token.php?token=" . urlencode($token);
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, $url);

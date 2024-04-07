@@ -1,13 +1,22 @@
 <?php
+if (!isset($_COOKIE['email'])) {
+    if (isset($_COOKIE['idToken'])) {
+        unset($_COOKIE['idToken']);
+        setcookie('idToken', '', time() - 3600, '/'); // empty value and old timestamp
+    }
+
+    $path = "/login";
+    header("Location: $path");
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    @import "./styles/styles.css";
-    @import "./styles/navigation.css";
-    @import "./styles/container.css";
-    @import "./styles/tasks.css";
+    @import "../../styles/styles.css";
+    @import "../../styles/navigation.css";
+    @import "../../styles/container.css";
+    @import "../../styles/tasks.css";
 </style>
 <head>
     <meta charset="UTF-8">
@@ -15,6 +24,12 @@
 </head>
 <body>
 <div class="navigation">
+    <div class="profile-header">
+        <div class="profile-icon"></div>
+        <div><?php echo $_COOKIE['email']; ?></div>
+        <a class="logout-button" href="/api/firebase/logout.php"> <img alt="Выйти" class="nav-icon"
+                                                                       src="../../resources/icons/ic_logout_24x24.svg"></a>
+    </div>
     <nav class="no-select"><img alt="Создать" class="nav-icon" src="../../resources/icons/ic_calendar_add_on_24x24.svg">
         Добавить задачу
     </nav>

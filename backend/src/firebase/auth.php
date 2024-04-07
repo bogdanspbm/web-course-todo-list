@@ -14,8 +14,8 @@ header('Content-Type: application/json'); // Указываем формат о�
 // Теперь данные формы доступны в $_POST массиве
 if (!isset($_POST['email']) || !isset($_POST['password'])) {
     header('HTTP/1.1 400 Bad Request');
-    echo json_encode(['error' => 'Email and password are required']);
-    exit;
+    $path = "/login";
+    header("Location: $path");
 }
 
 $firebaseRequestBody = json_encode([
@@ -38,11 +38,14 @@ if (isset($response['idToken'])) { // Проверяем наличие idToken 
 
     // Установка cookies с токеном. Обратите внимание, что время жизни cookie нужно настроить в соответствии с вашими требованиями
     setcookie('idToken', $response['idToken'], time() + (7 * 86400 * 30), "/"); // 86400 = 1 день
+    setcookie('email', $response['email'], time() + (7 * 86400 * 30), "/"); // 86400 = 1 день
 
-    echo json_encode(['success' => true, 'message' => 'Login successful', 'idToken' => $response['idToken']]);
+    $path = "/home";
+    header("Location: $path");
 } else {
     http_response_code(401); // Настройка кода ответа в случае ошибки авторизации
-    echo json_encode($response);
+    $path = "/login";
+    header("Location: $path");
 }
 
 function makeFirebaseRequest($url, $payload) {

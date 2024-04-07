@@ -1,6 +1,6 @@
 // reset_password.php
 <?php
-require_once '../credentials/firebase_credentials.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/credentials/firebase_credentials.inc';
 
 $token = FIREBASE_TOKEN;
 $url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={$token}";

@@ -1,6 +1,7 @@
 <?php
 
-require_once '../credentials/redis_credentials.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/credentials/redis_credentials.inc';
+
 require_once '../firebase/check_token.inc'; // Предполагается, что здесь функция checkToken возвращает массив с информацией о валидности токена и деталями пользователя
 
 header('Access-Control-Allow-Origin: *');

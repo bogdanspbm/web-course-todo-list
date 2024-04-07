@@ -1,7 +1,8 @@
 <?php
 
 // Подключаем файл с настройками Redis
-require_once '../credentials/redis_credentials.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/credentials/redis_credentials.inc';
+
 
 // Подключение к серверу Redis
 $redis = new Redis();

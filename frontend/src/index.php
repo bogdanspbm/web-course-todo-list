@@ -1,5 +1,5 @@
 <?php
-require_once 'api/firebase/check_token.inc';
+require_once 'api/firebase/lib/check_token.inc';
 
 // Обработка запросов к защищенным и публичным страницам
 $basePath = __DIR__ . '/pages';

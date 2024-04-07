@@ -1,5 +1,6 @@
 <?php
-require_once '../credentials/redis_credentials.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/credentials/redis_credentials.inc';
+
 
 
 header('Access-Control-Allow-Origin: *');

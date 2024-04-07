@@ -1,6 +1,6 @@
 <?php
 
-require_once '../credentials/firebase_credentials.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/credentials/firebase_credentials.inc';
 
 
 // Проверяем, передан ли токен как параметр GET-запроса

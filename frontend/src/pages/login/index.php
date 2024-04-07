@@ -19,7 +19,7 @@
         <a class="change-page-button" href="/register"><img alt="Войти" class="nav-icon" src="../../resources/icons/ic_arrow_left_alt_24x24.svg">
             Регистрация
         </a>
-        <form action="/api/firebase/auth.php" method="POST" id="registrationForm">
+        <form action="/api/firebase/rest/auth.php" method="POST" id="registrationForm">
             <div class="vertical-container" style="gap: 4px">
                 <label for="email">Почта:</label>
                 <input placeholder="Введите почту" type="email" id="email" name="email" required>

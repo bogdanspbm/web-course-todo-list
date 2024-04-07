@@ -1,6 +1,7 @@
 <?php
-require_once '../credentials/firebase_credentials.inc';
-require_once '../credentials/redis_credentials.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/credentials/firebase_credentials.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/credentials/redis_credentials.inc';
+
 
 $apiKey = FIREBASE_TOKEN;
 $url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={$apiKey}";

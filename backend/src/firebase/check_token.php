@@ -2,11 +2,11 @@
 
 require_once '../credentials/firebase_credentials.inc';
 
+
 // Проверяем, передан ли токен как параметр GET-запроса
 if (!isset($_GET['token'])) {
     header('Content-Type: application/json');
     echo json_encode(['error' => 'Token is required']);
-    exit;
 }
 
 $token = $_GET['token'];
@@ -25,7 +25,9 @@ if (isset($response['users'])) {
     echo json_encode(['error' => 'Unauthorized']);
 }
 
-function makeFirebaseRequest($url, $payload) {
+
+function makeFirebaseRequest($url, $payload)
+{
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);

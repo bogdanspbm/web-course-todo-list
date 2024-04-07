@@ -33,7 +33,7 @@
         <div class="add-task-button"><img alt="Создать" class="nav-icon" src="../../resources/icons/ic_add_24x24.svg">
             Добавить задачу
         </div>
-        <form style="display: none;" class="new-task">
+        <form action="/api/redis/create_task.php" style="display: none;" class="new-task">
             <div class="new-task-container">
                 <input id="title" class="title-input invisible-input" type="text" placeholder="Название задачи">
                 <textarea id="desc" maxLength="200" style="height: 14px"

@@ -7,6 +7,7 @@ if (!isset($_COOKIE['email'])) {
 
     $path = "/login";
     header("Location: $path");
+    exit;
 }
 ?>
 

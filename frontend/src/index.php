@@ -1,4 +1,5 @@
 <?php
+require_once 'api/firebase/check_token.inc';
 
 // Обработка запросов к защищенным и публичным страницам
 $basePath = __DIR__ . '/pages';
@@ -56,17 +57,8 @@ if (array_key_exists($requestPath, $routes)) {
 }
 
 
-function isTokenValid($token) {
-    $url = "https://todo.madzhuga.com/api/firebase/check_token.php?token=" . urlencode($token);
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    $data = json_decode($response, true);
+function isTokenValid($token)
+{
+    $data = checkToken($token);
     return isset($data['success']) && $data['success'];
 }

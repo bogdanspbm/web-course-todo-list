@@ -32,6 +32,7 @@ if ($response['success']) {
     $date = $_POST['date'];
     $uid = $_POST['task-uid'];
     $priority = $_POST['priority'];
+    $color = isset($_POST['color']) ? $_POST['color'] : "#F0F0F0";
 
     $task = [
         'uid' => $uid,
@@ -39,6 +40,7 @@ if ($response['success']) {
         'description' => $description,
         'date' => strtotime($date),
         'priority' => $priority,
+        'color' => $color,
         'status' => false
     ];
 

@@ -43,7 +43,7 @@ if (isset($response['email'])) {
 
     // Устанавливаем cookies. Здесь вы можете настроить время жизни cookies по своему усмотрению.
     setcookie('idToken', $response['idToken'], time() + (7 * 86400 * 30), "/"); // 86400 = 1 день
-    header('Location: /homepage/');
+    header('Location: /home');
     exit;
 } else {
     // Возвращаем ошибку Firebase, если регистрация не удалась

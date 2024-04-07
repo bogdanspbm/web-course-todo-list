@@ -1,4 +1,3 @@
-// login.php
 <?php
 require_once '../credentials/firebase_credentials.inc';
 require_once '../credentials/redis_credentials.inc';
@@ -10,23 +9,24 @@ $requestBody = file_get_contents('php://input');
 $requestData = json_decode($requestBody, true);
 
 header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json'); // Указываем формат ответа
 
-
-if (!isset($requestData['email']) || !isset($requestData['password'])) {
+// Теперь данные формы доступны в $_POST массиве
+if (!isset($_POST['email']) || !isset($_POST['password'])) {
     header('HTTP/1.1 400 Bad Request');
     echo json_encode(['error' => 'Email and password are required']);
     exit;
 }
 
 $firebaseRequestBody = json_encode([
-    'email' => $requestData['email'],
-    'password' => $requestData['password'],
+    'email' => $_POST['email'],
+    'password' => $_POST['password'],
     'returnSecureToken' => true
 ]);
 
 $response = json_decode(makeFirebaseRequest($url, $firebaseRequestBody), true);
 
-if (isset($response['email'])) {
+if (isset($response['idToken'])) { // Проверяем наличие idToken в ответе
     $redis = new Redis();
     $redis->connect(REDIS_HOST, REDIS_PORT);
     $redis->auth(REDIS_PASSWORD);
@@ -35,9 +35,13 @@ if (isset($response['email'])) {
     $redis->set('user_last_login:'.$response['email'], time());
 
     $redis->close();
-    echo json_encode(['success' => true, 'message' => 'Login successful']);
+
+    // Установка cookies с токеном. Обратите внимание, что время жизни cookie нужно настроить в соответствии с вашими требованиями
+    setcookie('idToken', $response['idToken'], time() + (7 * 86400 * 30), "/"); // 86400 = 1 день
+
+    echo json_encode(['success' => true, 'message' => 'Login successful', 'idToken' => $response['idToken']]);
 } else {
-    // Возвращаем ошибку Firebase, если вход не удался
+    http_response_code(401); // Настройка кода ответа в случае ошибки авторизации
     echo json_encode($response);
 }
 

@@ -63,6 +63,28 @@ input[type=date] {
     border: 1px solid #F0F0F0;
 }
 
+.date-view{
+    width: 120px;
+    padding-left: 4px;
+    padding-right: 4px;
+    background: transparent;
+    border-radius: 4px;
+    outline: none;
+    color: #242424;
+    border: 1px solid #F0F0F0;
+}
+
+.select-view{
+    width: 120px;
+    padding-left: 4px;
+    padding-right: 4px;
+    background: transparent;
+    border-radius: 4px;
+    outline: none;
+    color: #242424;
+    border: 1px solid #F0F0F0;
+}
+
 select {
     cursor: pointer;
     background: transparent;

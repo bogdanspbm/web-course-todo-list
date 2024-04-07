@@ -22,10 +22,10 @@ if ($response['success']) {
     if ($tasks) {
         echo $tasks; // Возвращаем список задач в формате JSON
     } else {
-        echo json_encode(['message' => 'Задачи не найдены']);
+        echo json_encode([]);
     }
 } else {
-    echo json_encode(['error' => 'Не удалось аутентифицировать пользователя']);
+    echo json_encode([]);
 }
 
 $redis->close();

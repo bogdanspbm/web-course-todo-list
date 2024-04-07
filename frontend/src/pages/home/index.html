@@ -33,18 +33,19 @@
         <div class="add-task-button"><img alt="Создать" class="nav-icon" src="../../resources/icons/ic_add_24x24.svg">
             Добавить задачу
         </div>
-        <form action="/api/redis/create_task.php" style="display: none;" class="new-task">
+        <form action="/api/redis/create_task.php" method="POST" style="display: none;" class="new-task">
             <div class="new-task-container">
-                <input id="title" class="title-input invisible-input" type="text" placeholder="Название задачи">
-                <textarea id="desc" maxLength="200" style="height: 14px"
+                <input name="title" id="title" class="title-input invisible-input" type="text" placeholder="Название задачи">
+                <textarea name="desc" id="desc" maxLength="200" style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                           class="desc-input invisible-input" placeholder="Описание"></textarea>
+                <input name="task-uid" type="hidden" id="task-uid" value="none">
             </div>
             <div class="new-task-footer">
-                <input id="date" onchange="this.style.color = '#242424';" style="width: 128px;"
+                <input name="date" id="date" onchange="this.style.color = '#242424';" style="width: 128px;"
                        onclick="this.showPicker()"
                        type="date">
-                <select id="priority" onchange="this.style.color = '#242424';" style="width: 128px;">
+                <select name="priority" id="priority" onchange="this.style.color = '#242424';" style="width: 128px;">
                     <option value="" disabled selected>Приоритет</option>
                     <option>Низкий</option>
                     <option>Средний</option>

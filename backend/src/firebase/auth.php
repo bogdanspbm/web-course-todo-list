@@ -14,8 +14,9 @@ header('Content-Type: application/json'); // Указываем формат о�
 // Теперь данные формы доступны в $_POST массиве
 if (!isset($_POST['email']) || !isset($_POST['password'])) {
     header('HTTP/1.1 400 Bad Request');
-    $path = "/login";
+    $path = "/login?code=400";
     header("Location: $path");
+    exit;
 }
 
 $firebaseRequestBody = json_encode([
@@ -25,6 +26,7 @@ $firebaseRequestBody = json_encode([
 ]);
 
 $response = json_decode(makeFirebaseRequest($url, $firebaseRequestBody), true);
+
 
 if (isset($response['idToken'])) { // Проверяем наличие idToken в ответе
     $redis = new Redis();
@@ -40,12 +42,19 @@ if (isset($response['idToken'])) { // Проверяем наличие idToken 
     setcookie('idToken', $response['idToken'], time() + (7 * 86400 * 30), "/"); // 86400 = 1 день
     setcookie('email', $response['email'], time() + (7 * 86400 * 30), "/"); // 86400 = 1 день
 
+    if(isset($_POST['redirect'])){
+        print_r($response);
+        exit;
+    }
+
     $path = "/home";
     header("Location: $path");
+    exit;
 } else {
     http_response_code(401); // Настройка кода ответа в случае ошибки авторизации
-    $path = "/login";
+    $path = "/login?code=401";
     header("Location: $path");
+    exit;
 }
 
 function makeFirebaseRequest($url, $payload) {

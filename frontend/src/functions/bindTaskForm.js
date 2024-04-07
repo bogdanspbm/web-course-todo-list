@@ -1,6 +1,9 @@
+import {generateUID} from "./StringUtils.js";
+
 export function bindTaskForm() {
     const cancelButton = document.getElementById("cancel");
     const form = document.getElementsByClassName("new-task")[0];
+    const uidPlate = document.getElementById("task-uid");
     const addTaskButton = document.getElementsByClassName("add-task-button")[0];
     const desc = document.getElementById("desc");
 
@@ -13,6 +16,7 @@ export function bindTaskForm() {
     addTaskButton.addEventListener("click", () => {
         form.style.display = "flex";
         addTaskButton.style.display = "none"
+        uidPlate.value = generateUID();
     });
 
 }

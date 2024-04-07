@@ -7,6 +7,7 @@ require_once '../credentials/firebase_credentials.inc';
 if (!isset($_GET['token'])) {
     header('Content-Type: application/json');
     echo json_encode(['error' => 'Token is required']);
+    exit;
 }
 
 $token = $_GET['token'];

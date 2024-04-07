@@ -1,3 +1,3 @@
 <?php
 
-define("FIREBASE_TOKEN", "TOKEN");
+define("FIREBASE_TOKEN", "AIzaSyACeoZr635AKOHPh5_imf5FkC8bqHL4Olo");

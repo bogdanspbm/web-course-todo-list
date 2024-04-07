@@ -7,8 +7,13 @@ $basePath = __DIR__ . '/pages';
 // Получаем токен из cookies
 $token = isset($_COOKIE['idToken']) ? $_COOKIE['idToken'] : '';
 
-// Определяем текущий запрошенный путь
-$requestPath = trim($_SERVER['REQUEST_URI'], '/');
+// Определяем текущий запрошенный путь и query строку
+$requestUri = $_SERVER['REQUEST_URI'];
+$queryString = $_SERVER['QUERY_STRING'];
+
+// Извлекаем путь без query параметров
+$requestPath = explode('?', $requestUri, 2)[0];
+$requestPath = trim($requestPath, '/');
 
 // Путь для перенаправления, если токен не валиден
 $redirectPathWhenTokenInvalid = '/login'; // или '/login.php', если нужно
@@ -27,11 +32,11 @@ $isTokenValid = isTokenValid($token);
 
 if (!$isTokenValid && !in_array($requestPath, $publicPaths)) {
     // Если токен недействителен и путь не один из публичных, редиректим на страницу входа/регистрации
-    header("Location: $redirectPathWhenTokenInvalid");
+    header("Location: $redirectPathWhenTokenInvalid" . ($queryString ? "?$queryString" : ""));
     exit;
 } elseif ($isTokenValid && in_array($requestPath, $publicPaths)) {
     // Если токен валиден, но пытаемся получить доступ к регистрации или входу, редиректим на home
-    header("Location: $redirectPathWhenTokenValid");
+    header("Location: $redirectPathWhenTokenValid" . ($queryString ? "?$queryString" : ""));
     exit;
 }
 
@@ -55,7 +60,6 @@ if (array_key_exists($requestPath, $routes)) {
     header("HTTP/1.1 404 Not Found");
     echo "<h1>404 Page Not Found</h1>";
 }
-
 
 function isTokenValid($token)
 {

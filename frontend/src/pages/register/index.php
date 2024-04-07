@@ -19,7 +19,7 @@
         <a class="change-page-button" href="/login"><img alt="Войти" class="nav-icon" src="../../resources/icons/ic_arrow_left_alt_24x24.svg">
             Войти в аккаунт
         </a>
-        <form action="http://185.47.54.162/firebase/register.php" method="POST" id="registrationForm">
+        <form action="/api/firebase/register.php" method="POST" id="registrationForm">
             <div class="vertical-container" style="gap: 4px">
                 <label for="email">Почта:</label>
                 <input placeholder="Введите почту" type="email" id="email" name="email" required>
@@ -41,5 +41,5 @@
     </div>
 </div>
 </body>
-<script type="module" src="index.js"></script>
+<script type="module" src="../../scripts/register.js"></script>
 </html>

@@ -90,7 +90,7 @@ export function bindRegisterForm() {
             }
 
             if (email) {
-                fetch(`http://185.47.54.162/redis/check_registration.php?email=${email}`)
+                fetch(`/api/redis/check_registration.php?email=${email}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data.registered) {

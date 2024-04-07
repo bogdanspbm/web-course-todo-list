@@ -1,6 +1,7 @@
 <?php
 
-// Предполагаем, что функция isTokenValid($token) уже определена
+// Обработка запросов к защищенным и публичным страницам
+$basePath = __DIR__ . '/pages';
 
 // Получаем токен из cookies
 $token = isset($_COOKIE['idToken']) ? $_COOKIE['idToken'] : '';
@@ -33,8 +34,6 @@ if (!$isTokenValid && !in_array($requestPath, $publicPaths)) {
     exit;
 }
 
-// Обработка запросов к защищенным и публичным страницам
-$basePath = __DIR__ . '/pages';
 $routes = [
     '' => '/home/index.php', // Корень сайта
     'home' => '/home/index.php',
@@ -57,7 +56,7 @@ if (array_key_exists($requestPath, $routes)) {
 }
 
 function isTokenValid($token) {
-    $url = "http://185.47.54.162/firebase/check_token.php?token=" . urlencode($token);
+    $url = "/api/firebase/check_token.php?token=" . urlencode($token);
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, $url);

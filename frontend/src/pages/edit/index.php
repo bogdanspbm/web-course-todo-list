@@ -89,7 +89,7 @@ $dates = [];
                                      document.getElementById('color-display').style.color = document.getTextColorFromBG(this.value);"
                            name="color" id="color" type="color">
                 </div>
-                <input id="cancel" style="margin-left: auto;" class="button-secondary" type="reset" value="Отмена">
+                <a class="cancel-button" href="/home">Отмена</a>
                 <input id="submit" class="button-primary" type="submit" value="Добавить задачу">
             </div>
         </form>

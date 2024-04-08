@@ -88,6 +88,7 @@
                 </div>
             </div>
             <div class="new-task-horizontal">
+                <div class="color-flag" style="background: red"></div>
                 <div class="new-task-container">
                     <input readonly name="title" class="title-input invisible-input" type="text"
                            value="<?php echo $task['title']; ?>"
@@ -98,7 +99,10 @@
                               placeholder="Описание"><?php echo $task['description']; ?></textarea>
                     <input readonly name="task-uid" type="hidden" value="none">
                 </div>
-                <div class="color-flag" style="background: red"></div>
+                <div class="task-control">
+                    <a class="task-control-button"><img alt="Редактировать" class="nav-icon" src="../../resources/icons/ic_edit_24x24.svg"></a>
+                    <a class="task-control-button"><img alt="Удалить" class="nav-icon" src="../../resources/icons/ic_delete_24x24.svg"></a>
+                </div>
             </div>
         </div>
         <?php

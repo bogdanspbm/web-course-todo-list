@@ -1,5 +1,6 @@
 <?php
-require_once 'api/redis/lib/get_tasks.inc';
+require_once 'api/postgres/lib/get_tasks.inc';
+require_once 'api/libs/date_lib.inc';
 
 if (!isset($_COOKIE['email'])) {
     if (isset($_COOKIE['idToken'])) {
@@ -37,14 +38,21 @@ $dates = [];
         <a class="logout-button" href="/frontend/src/api/firebase/logout.php"> <img alt="Выйти" class="nav-icon"
                                                                                     src="../../resources/icons/ic_logout_24x24.svg"></a>
     </div>
-    <nav class="no-select"><img alt="Создать" class="nav-icon" src="../../resources/icons/ic_calendar_add_on_24x24.svg">
-        Добавить задачу
+    <nav class="no-select"><a class="nav-link" href="/edit">
+            <img alt="Создать" class="nav-icon" src="../../resources/icons/ic_calendar_add_on_24x24.svg">
+            Добавить задачу
+        </a>
     </nav>
-    <nav class="no-select selected"><img alt="Домой" class="nav-icon" src="../../resources/icons/ic_home_24x24.svg">
-        Домой
+    <nav class="no-select selected"><a class="nav-link" href="/home">
+            <img alt="Домой" class="nav-icon" src="../../resources/icons/ic_home_24x24.svg">
+            Домой
+        </a>
     </nav>
-    <nav class="no-select"><img alt="Сегодня" class="nav-icon" src="../../resources/icons/ic_calendar_today_24x24.svg">
-        Черновики
+    <nav class="no-select">
+        <a class="nav-link" href="/draft">
+            <img alt="Сегодня" class="nav-icon" src="../../resources/icons/ic_calendar_today_24x24.svg">
+            Черновики
+        </a>
     </nav>
 </div>
 <div class="container-wrapper">
@@ -75,7 +83,10 @@ $dates = [];
                 </select>
                 <div class="custom-color-picker" style="width: 64px;">
                     <button type="button" name="color-display" id="color-display">Цвет</button>
-                    <input  value="#F0F0F0" onchange="document.getElementById('color-display').style.background = this.value;" name="color" id="color" type="color">
+                    <input value="#F0F0F0"
+                           onchange="document.getElementById('color-display').style.background = this.value;
+                                     document.getElementById('color-display').style.color = document.getTextColorFromBG(this.value);"
+                           name="color" id="color" type="color">
                 </div>
                 <input id="cancel" style="margin-left: auto;" class="button-secondary" type="reset" value="Отмена">
                 <input id="submit" class="button-primary" type="submit" value="Добавить задачу">
@@ -86,7 +97,7 @@ $dates = [];
 
             if (!isset($dates[$date])) {
                 $dates[$date] = true;
-                echo "<h2>" . date("d-m-Y", $date) . "</h2>";
+                echo "<h2>" . format_date_lite($date) . "</h2>";
             }
             for ($i = 0; $i < count($value); $i++) {
 
@@ -100,6 +111,7 @@ $dates = [];
                         </div>
                     </div>
                     <div class="new-task-horizontal">
+                        <div class="color-flag" style="background: <?php echo $task['color']; ?>"></div>
                         <div class="new-task-container">
                             <input readonly name="title" class="title-input invisible-input" type="text"
                                    value="<?php echo $task['title']; ?>"
@@ -110,7 +122,13 @@ $dates = [];
                                       placeholder="Описание"><?php echo $task['description']; ?></textarea>
                             <input readonly name="task-uid" type="hidden" value="none">
                         </div>
-                        <div class="color-flag" style="background: <?php echo $task['color']; ?>"></div>
+                        <div class="task-control">
+                            <a href="/edit?uid=<?php echo $task['uid']; ?>" class="task-control-button"><img alt="Редактировать" class="nav-icon"
+                                                                src="../../resources/icons/ic_edit_24x24.svg"></a>
+                            <a href="/api/postgres/rest/delete_task.php?uid=<?php echo $task['uid']; ?>"
+                               class="task-control-button"><img alt="Удалить" class="nav-icon"
+                                                                src="../../resources/icons/ic_delete_24x24.svg"></a>
+                        </div>
                     </div>
                 </div>
                 <?php

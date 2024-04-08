@@ -19,6 +19,8 @@
 
     width: 100%;
 
+    align-items: stretch;
+
     border-radius: 10px;
     background: white;
     height: fit-content;
@@ -186,10 +188,34 @@ input[type="color"] {
     height: 28px;
 }
 
-.color-flag{
-    border-radius: 0 10px 10px 0;
+.color-flag {
+    border-radius: 10px 0 0 10px;
     height: auto;
-    margin-left: auto;
-    border-left: 1px solid #F0F0F0;
+    border: 1px solid #E0E0E0;
+    border-right-color: #F0F0F0;
     width: 16px;
+}
+
+.task-control {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    margin: auto;
+    gap: 12px;
+    margin-right: 16px;
+    transition: 0.2s;
+    opacity: 0;
+}
+
+.new-task-horizontal:hover > .task-control {
+    opacity: 1;
+}
+
+.task-control-button {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(4417%) hue-rotate(186deg) brightness(106%) contrast(63%);
+    cursor: pointer;
+}
+
+.task-control-button:hover {
+    filter: brightness(0) saturate(100%) invert(12%) sepia(23%) saturate(13%) hue-rotate(315deg) brightness(97%) contrast(94%);
 }

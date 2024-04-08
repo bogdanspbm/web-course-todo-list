@@ -45,6 +45,8 @@ $routes = [
     'home' => '/home/index.php',
     'register' => '/register/index.php',
     'login' => '/login/index.php',
+    'edit' => '/edit/index.php',
+    'draft' => '/draft/index.php',
     // Добавьте другие маршруты здесь
 ];
 

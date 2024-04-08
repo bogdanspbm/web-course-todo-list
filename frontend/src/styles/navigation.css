@@ -73,3 +73,12 @@ nav:hover:not(.selected) {
     width: 24px;
     background: #52c41a;
 }
+
+.nav-link{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    color: #242424;
+    text-decoration: none;
+    align-items: center;
+}

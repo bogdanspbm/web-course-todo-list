@@ -1,5 +1,6 @@
 <?php
 require_once 'api/postgres/lib/get_task.inc';
+require_once 'api/libs/string_lib.inc';
 
 if (!isset($_COOKIE['email'])) {
     if (isset($_COOKIE['idToken'])) {
@@ -16,6 +17,7 @@ if (isset($_GET["uid"])) {
     $task = getUserTask($_GET["uid"]);
 } else {
     $task = [];
+    $task['uid'] = generateUID();
 }
 
 $dates = [];
@@ -62,7 +64,7 @@ $dates = [];
 <div class="container-wrapper">
     <div class="container">
         <h2>Редактирование задачи</h2>
-        <form id="task-create-form" action="/api/redis/create_task.php" method="POST" class="new-task">
+        <form id="task-create-form" action="/api/postgres/redirect/create_task.php" method="POST" class="new-task">
             <div class="new-task-container">
                 <input value="<?php echo $task['title']; ?>" name="title" id="title" class="title-input invisible-input"
                        type="text"
@@ -70,7 +72,7 @@ $dates = [];
                 <textarea name="desc" id="desc" maxLength="200" style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                           class="desc-input invisible-input" placeholder="Описание"><?php echo $task['description']; ?></textarea>
-                <input name="task-uid" type="hidden" id="task-uid" value="">
+                <input name="task-uid" type="hidden" id="task-uid" value="<?php echo $task['uid']; ?>">
             </div>
             <div class="new-task-footer">
                 <input value="<?php echo date("Y-m-d", $task['task_date_long']); ?>" name="task-date" id="task-date" onchange="this.style.color = '#242424';" style="width: 128px;"
@@ -90,7 +92,7 @@ $dates = [];
                            name="color" id="color" type="color">
                 </div>
                 <a class="cancel-button" href="/home">Отмена</a>
-                <input id="submit" class="button-primary" type="submit" value="Добавить задачу">
+                <input id="submit" class="button-primary" type="submit" value="Опуликовать">
             </div>
         </form>
     </div>

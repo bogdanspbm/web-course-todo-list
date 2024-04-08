@@ -43,6 +43,7 @@ if ($response['success']) {
     ];
 
     // Добавляем задачу в список задач для пользователя
+    $tasksDao->deleteTask($uid, $email);
     $tasksDao->createTask($task);
 
     $path = "/home?code=200";

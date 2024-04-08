@@ -78,6 +78,7 @@ nav:hover:not(.selected) {
     display: flex;
     flex-direction: row;
     gap: 8px;
+    width: 100%;
     color: #242424;
     text-decoration: none;
     align-items: center;

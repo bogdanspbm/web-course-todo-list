@@ -35,7 +35,7 @@ $dates = [];
     <div class="profile-header">
         <div class="profile-icon"></div>
         <div><?php echo $_COOKIE['email']; ?></div>
-        <a class="logout-button" href="/frontend/src/api/firebase/logout.php"> <img alt="Выйти" class="nav-icon"
+        <a class="logout-button" href="/api/firebase/redirect/logout.php"> <img alt="Выйти" class="nav-icon"
                                                                                     src="../../resources/icons/ic_logout_24x24.svg"></a>
     </div>
     <nav class="no-select"><a class="nav-link" href="/edit">

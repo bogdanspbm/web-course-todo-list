@@ -1,5 +1,6 @@
 <?php
 require_once 'api/postgres/lib/get_tasks.inc';
+require_once 'api/redis/lib/get_task_completion.inc';
 require_once 'api/libs/date_lib.inc';
 
 if (!isset($_COOKIE['email'])) {
@@ -36,7 +37,7 @@ $dates = [];
         <div class="profile-icon"></div>
         <div><?php echo $_COOKIE['email']; ?></div>
         <a class="logout-button" href="/api/firebase/redirect/logout.php"> <img alt="Выйти" class="nav-icon"
-                                                                                    src="../../resources/icons/ic_logout_24x24.svg"></a>
+                                                                                src="../../resources/icons/ic_logout_24x24.svg"></a>
     </div>
     <nav class="no-select"><a class="nav-link" href="/edit">
             <img alt="Создать" class="nav-icon" src="../../resources/icons/ic_calendar_add_on_24x24.svg">
@@ -100,13 +101,15 @@ $dates = [];
                 echo "<h2>" . format_date_lite($date) . "</h2>";
             }
             for ($i = 0; $i < count($value); $i++) {
-
                 $task = $value[$i];
+                $statusResult = getTaskCompletion($task['uid']);
                 ?>
                 <div class="horizontal-container" style="align-items: center; gap: 8px">
                     <div class="checkbox-wrapper">
                         <div class="round">
-                            <input autocomplete="off" type="checkbox" id="<?php echo "checkbox" . $task['uid'] ?>"/>
+                            <input <?php echo ($statusResult['status'] == 1 || $statusResult['status'] == '1') ? 'checked="true"' : "" ?>
+                                   onclick="document.setTaskStatus(this, '<?php echo $task['uid']; ?>').then();"
+                                   autocomplete="off" type="checkbox" id="<?php echo "checkbox" . $task['uid'] ?>"/>
                             <label for="<?php echo "checkbox" . $task['uid'] ?>"></label>
                         </div>
                     </div>

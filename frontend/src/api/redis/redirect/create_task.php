@@ -2,7 +2,7 @@
 <?php
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api/dao/tasks.inc';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/api/firebase/check_token.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/firebase/lib/check_token.inc';
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');

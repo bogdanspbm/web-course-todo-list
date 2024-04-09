@@ -66,7 +66,7 @@ $dates = [];
                 ?>
                 <div class="horizontal-container" style="align-items: center; gap: 8px">
                     <div class="new-task-horizontal">
-                        <div class="color-flag" style="background: <?php echo $task['color']; ?>"></div>
+                        <div class="color-flag" style="border: 1px solid <?php echo $task['color'] != "" && isset($task['color']) ? $task['color'] : "#FFFFFF" ; ?>; background: <?php echo $task['color'] != "" && isset($task['color']) ? $task['color'] : "#FFFFFF" ;  ?>;border-right-color: #F0F0F0;"></div>
                         <div class="new-task-container">
                             <input readonly name="title" class="title-input invisible-input" type="text"
                                    value="<?php echo $task['title']; ?>"
@@ -95,5 +95,5 @@ $dates = [];
     </div>
 </div>
 </body>
-<script type="module" src="../../scripts/home.js"></script>
+<script type="module" src="../../scripts/draft.js"></script>
 </html>

@@ -41,8 +41,15 @@
         <h2>Редактирование задачи</h2>
         <form id="task-create-form" action="/api/redis/create_task.php" method="POST" class="new-task">
             <div class="new-task-container">
-                <input name="title" id="title" class="title-input invisible-input" type="text"
-                       placeholder="Название задачи">
+                <div class="horizontal-container">
+                    <input name="title" id="title" class="title-input invisible-input" type="text"
+                           placeholder="Название задачи">
+                    <div class="loader" id="progress-loader"></div>
+                    <img alt="Успешное сохранение" src="../../resources/icons/ic_cloud_done_24x24.svg"
+                         class="loader-success" id="progress-loader-success">
+                    <img alt="Ошибка сохранения" src="../../resources/icons/ic_failed_24x24.svg" class="loader-failed"
+                         id="progress-loader-failed">
+                </div>
                 <textarea name="desc" id="desc" maxLength="200" style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                           class="desc-input invisible-input" placeholder="Описание"></textarea>

@@ -25,7 +25,7 @@ export async function setTaskStatus(checkbox, uid) {
             checkbox.checked = !checked;
             throw new Error(data.message);
         }
-        
+
 
         // Успешный запрос, ничего не делаем, т.к. checkbox остается в новом состоянии
     } catch (error) {

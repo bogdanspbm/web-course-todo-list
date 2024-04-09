@@ -65,18 +65,34 @@ $dates = [];
         <form id="task-create-form" action="/api/postgres/redirect/create_task.php" method="POST" style="display: none;"
               class="new-task">
             <div class="new-task-container">
-                <input name="title" id="title" class="title-input invisible-input" type="text"
-                       placeholder="Название задачи">
-                <textarea name="desc" id="desc" maxLength="200" style="height: 14px"
+                <div class="horizontal-container">
+                    <input onfocusout="document.setInputValue(this, 'title');" value="<?php echo $task['title']; ?>"
+                           name="title" id="title" class="title-input invisible-input"
+                           type="text"
+                           placeholder="Название задачи">
+                    <div style="display: none" class="loader" id="progress-loader"></div>
+                    <img style="display: none" alt="Успешное сохранение"
+                         src="../../resources/icons/ic_cloud_done_24x24.svg"
+                         class="loader-success" id="progress-loader-success">
+                    <img style="display: none" alt="Ошибка сохранения" src="../../resources/icons/ic_failed_24x24.svg"
+                         class="loader-failed"
+                         id="progress-loader-failed">
+                </div>
+                <textarea onfocusout="document.setInputValue(this, 'description')" name="desc" id="desc" maxLength="200"
+                          style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                           class="desc-input invisible-input" placeholder="Описание"></textarea>
                 <input name="task-uid" type="hidden" id="task-uid" value="none">
             </div>
             <div class="new-task-footer">
-                <input name="task-date" id="task-date" onchange="this.style.color = '#242424';" style="width: 128px;"
+                <input name="task-date" id="task-date"
+                       onchange="document.setInputValue(this, 'task-date'); this.style.color = '#242424';"
+                       style="width: 128px;"
                        onclick="this.showPicker()"
                        type="date">
-                <select name="priority" id="priority" onchange="this.style.color = '#242424';" style="width: 96px;">
+                <select name="priority" id="priority"
+                        onchange="document.setInputValue(this, 'priority'); this.style.color = '#242424';"
+                        style="width: 96px;">
                     <option value="" disabled selected>Приоритет</option>
                     <option>Низкий</option>
                     <option>Средний</option>
@@ -85,7 +101,8 @@ $dates = [];
                 <div class="custom-color-picker" style="width: 64px;">
                     <button type="button" name="color-display" id="color-display">Цвет</button>
                     <input value="#F0F0F0"
-                           onchange="document.getElementById('color-display').style.background = this.value;
+                           onchange="document.setInputValue(this, 'color');
+                                     document.getElementById('color-display').style.background = this.value;
                                      document.getElementById('color-display').style.color = document.getTextColorFromBG(this.value);"
                            name="color" id="color" type="color">
                 </div>
@@ -108,13 +125,14 @@ $dates = [];
                     <div class="checkbox-wrapper">
                         <div class="round">
                             <input <?php echo ($statusResult['status'] == 1 || $statusResult['status'] == '1') ? 'checked="true"' : "" ?>
-                                   onclick="document.setTaskStatus(this, '<?php echo $task['uid']; ?>').then();"
-                                   autocomplete="off" type="checkbox" id="<?php echo "checkbox" . $task['uid'] ?>"/>
+                                    onclick="document.setTaskStatus(this, '<?php echo $task['uid']; ?>').then();"
+                                    autocomplete="off" type="checkbox" id="<?php echo "checkbox" . $task['uid'] ?>"/>
                             <label for="<?php echo "checkbox" . $task['uid'] ?>"></label>
                         </div>
                     </div>
                     <div class="new-task-horizontal">
-                        <div class="color-flag" style="background: <?php echo $task['color']; ?>"></div>
+                        <div class="color-flag"
+                             style="border: 1px solid <?php echo $task['color'] != "" && isset($task['color']) ? $task['color'] : "#FFFFFF"; ?>; background: <?php echo $task['color'] != "" && isset($task['color']) ? $task['color'] : "#FFFFFF"; ?> ;border-right-color: #F0F0F0;"></div>
                         <div class="new-task-container">
                             <input readonly name="title" class="title-input invisible-input" type="text"
                                    value="<?php echo $task['title']; ?>"
@@ -123,7 +141,7 @@ $dates = [];
                                       oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                                       class="desc-input invisible-input"
                                       placeholder="Описание"><?php echo $task['description']; ?></textarea>
-                            <input readonly name="task-uid" type="hidden" value="none">
+                            <input readonly type="hidden" value="none">
                         </div>
                         <div class="task-control">
                             <a href="/api/postgres/redirect/delete_task.php?uid=<?php echo $task['uid']; ?>"

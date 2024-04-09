@@ -66,28 +66,56 @@ $dates = [];
         <h2>Редактирование задачи</h2>
         <form id="task-create-form" action="/api/postgres/redirect/create_task.php" method="POST" class="new-task">
             <div class="new-task-container">
-                <input value="<?php echo $task['title']; ?>" name="title" id="title" class="title-input invisible-input"
-                       type="text"
-                       placeholder="Название задачи">
-                <textarea name="desc" id="desc" maxLength="200" style="height: 14px"
+                <div class="horizontal-container">
+                    <input onfocusout="document.setInputValue(this, 'title');" value="<?php echo $task['title']; ?>"
+                           name="title" id="title" class="title-input invisible-input"
+                           type="text"
+                           placeholder="Название задачи">
+                    <div style="display: none" class="loader" id="progress-loader"></div>
+                    <img style="display: none" alt="Успешное сохранение"
+                         src="../../resources/icons/ic_cloud_done_24x24.svg"
+                         class="loader-success" id="progress-loader-success">
+                    <img style="display: none" alt="Ошибка сохранения" src="../../resources/icons/ic_failed_24x24.svg"
+                         class="loader-failed"
+                         id="progress-loader-failed">
+                </div>
+                <textarea onfocusout="document.setInputValue(this, 'description');" name="desc" id="desc"
+                          maxLength="200" style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
-                          class="desc-input invisible-input" placeholder="Описание"><?php echo $task['description']; ?></textarea>
+                          class="desc-input invisible-input"
+                          placeholder="Описание"><?php echo $task['description']; ?></textarea>
                 <input name="task-uid" type="hidden" id="task-uid" value="<?php echo $task['uid']; ?>">
             </div>
             <div class="new-task-footer">
-                <input value="<?php echo date("Y-m-d", $task['task_date_long']); ?>" name="task-date" id="task-date" onchange="this.style.color = '#242424';" style="width: 128px;"
+                <input value="<?php echo date("Y-m-d", $task['task_date_long']); ?>" name="task-date" id="task-date"
+                       onchange="document.setInputValue(this, 'task-date');this.style.color = '#242424';"
+                       style="width: 128px;"
                        onclick="this.showPicker()"
                        type="date">
-                <select name="priority" id="priority" onchange="this.style.color = '#242424';" style="width: 96px;">
-                    <option value="" disabled <?php if(!isset($task['priority']) || $task['priority'] == "") echo "selected"; ?>>Приоритет</option>
-                    <option <?php if(isset($task['priority']) || $task['priority'] == "Низкий") echo "selected"; ?>>Низкий</option>
-                    <option <?php if(isset($task['priority']) || $task['priority'] == "Средний") echo "selected"; ?>>Средний</option>
-                    <option <?php if(isset($task['priority']) || $task['priority'] == "Высокий") echo "selected"; ?>>Высокий</option>
+                <select name="priority" id="priority"
+                        onchange="document.setInputValue(this, 'priority'); this.style.color = '#242424';"
+                        style="width: 96px;">
+                    <option value=""
+                            disabled <?php if (!isset($task['priority']) || $task['priority'] == "") echo "selected"; ?>>
+                        Приоритет
+                    </option>
+                    <option <?php if (isset($task['priority']) || $task['priority'] == "Низкий") echo "selected"; ?>>
+                        Низкий
+                    </option>
+                    <option <?php if (isset($task['priority']) || $task['priority'] == "Средний") echo "selected"; ?>>
+                        Средний
+                    </option>
+                    <option <?php if (isset($task['priority']) || $task['priority'] == "Высокий") echo "selected"; ?>>
+                        Высокий
+                    </option>
                 </select>
                 <div class="custom-color-picker" style="width: 64px;">
-                    <button type="button" name="color-display" id="color-display" style="background: <?php echo $task['color']; ?>">Цвет</button>
+                    <button type="button" name="color-display" id="color-display"
+                            style="background: <?php echo $task['color']; ?>">Цвет
+                    </button>
                     <input value="<?php echo $task['color']; ?>"
-                           onchange="document.getElementById('color-display').style.background = this.value;
+                           onchange="document.setInputValue(this, 'color');
+                                     document.getElementById('color-display').style.background = this.value;
                                      document.getElementById('color-display').style.color = document.getTextColorFromBG(this.value);"
                            name="color" id="color" type="color">
                 </div>

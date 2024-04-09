@@ -265,3 +265,32 @@ button:hover {
 .cancel-button:hover {
     background: #F3F3F3;
 }
+
+.loader {
+    margin-left: auto;
+    border: 4px solid transparent; /* Light grey */
+    border-top: 4px solid #fadb14; /* Blue */
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    animation: spin 1s linear infinite;
+}
+
+.loader-success {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) saturate(100%) invert(74%) sepia(26%) saturate(5372%) hue-rotate(55deg) brightness(94%) contrast(86%);
+}
+
+.loader-failed {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) saturate(100%) invert(22%) sepia(98%) saturate(2931%) hue-rotate(345deg) brightness(97%) contrast(99%);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

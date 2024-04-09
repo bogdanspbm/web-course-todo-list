@@ -1,3 +1,4 @@
 import {bindAuthForm} from "../functions/bindAuthForm.js";
+import {deleteTask} from "../functions/deleteTask.js";
 
-bindAuthForm();
+document.deleteTask = deleteTask;

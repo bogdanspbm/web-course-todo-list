@@ -64,7 +64,7 @@ $dates = [];
 
                 $task = $value[$i];
                 ?>
-                <div class="horizontal-container" style="align-items: center; gap: 8px">
+                <div id="container-<?php echo $task['uid']; ?>" class="horizontal-container" style="height: fit-content; max-height: 500px; overflow-y: hidden; transition: max-height 0.5s; align-items: center; gap: 8px">
                     <div class="new-task-horizontal">
                         <div class="color-flag" style="border: 1px solid <?php echo $task['color'] != "" && isset($task['color']) ? $task['color'] : "#FFFFFF" ; ?>; background: <?php echo $task['color'] != "" && isset($task['color']) ? $task['color'] : "#FFFFFF" ;  ?>;border-right-color: #F0F0F0;"></div>
                         <div class="new-task-container">
@@ -77,15 +77,15 @@ $dates = [];
                                       placeholder="Описание"><?php echo $task['description']; ?></textarea>
                             <input readonly name="task-uid" type="hidden" value="<?php echo $task['uid']; ?>">
                         </div>
-                        <div class="task-control">
+                        <div class="task-control" id="task-control-<?php echo $task['uid']; ?>">
                             <a href="/edit?uid=<?php echo $task['uid']; ?>" class="task-control-button"><img alt="Редактировать" class="nav-icon"
                                                                 src="resources/icons/ic_edit_24x24.svg"></a>
-                            <a href="/api/postgres/redirect/delete_task.php?uid=<?php echo $task['uid']; ?>"
-                               class="task-control-button"><img alt="Удалить" class="nav-icon"
-                                                                src="resources/icons/ic_delete_24x24.svg"></a>
+                            <div class="task-control-button" onclick="document.deleteTask('<?php echo $task['uid']; ?>')"><img alt="Удалить" class="nav-icon"
+                                                                                                                               src="resources/icons/ic_delete_24x24.svg"></div>
                             <div class="task-control-button"><img alt="Опубликовать" class="nav-icon"
                                                                 src="resources/icons/ic_bookmark_add_24x24.svg"></div>
                         </div>
+                        <div style="display: none" class="loader-gray" id="progress-loader-<?php echo $task['uid']; ?>"></div>
                     </div>
                 </div>
                 <?php

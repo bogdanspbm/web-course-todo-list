@@ -115,13 +115,14 @@ $dates = [];
 
             if (!isset($dates[$date])) {
                 $dates[$date] = true;
-                echo "<h2>" . format_date_lite($date) . "</h2>";
+                echo "<h2 id='date-$date'>" . format_date_lite($date) . "</h2>";
             }
             for ($i = 0; $i < count($value); $i++) {
                 $task = $value[$i];
                 $statusResult = getTaskCompletion($task['uid']);
                 ?>
-                <div class="horizontal-container" style="align-items: center; gap: 8px">
+                <div id="container-<?php echo $task['uid']; ?>" class="date-<?php echo $date; ?> horizontal-container"
+                     style="height: fit-content; max-height: 500px; overflow-y: hidden; transition: max-height 0.5s; align-items: center; gap: 8px">
                     <div class="checkbox-wrapper">
                         <div class="round">
                             <input <?php echo ($statusResult['status'] == 1 || $statusResult['status'] == '1') ? 'checked="true"' : "" ?>
@@ -143,11 +144,15 @@ $dates = [];
                                       placeholder="Описание"><?php echo $task['description']; ?></textarea>
                             <input readonly type="hidden" value="none">
                         </div>
-                        <div class="task-control">
-                            <a href="/api/postgres/redirect/delete_task.php?uid=<?php echo $task['uid']; ?>"
-                               class="task-control-button"><img alt="Удалить" class="nav-icon"
-                                                                src="../../resources/icons/ic_delete_24x24.svg"></a>
+                        <div class="task-control" id="task-control-<?php echo $task['uid']; ?>">
+                            <div class="task-control-button"
+                                 onclick="document.deleteTask('<?php echo $task['uid']; ?>')"><img alt="Удалить"
+                                                                                                   class="nav-icon"
+                                                                                                   src="resources/icons/ic_delete_24x24.svg">
+                            </div>
                         </div>
+                        <div style="display: none" class="loader-gray"
+                             id="progress-loader-<?php echo $task['uid']; ?>"></div>
                     </div>
                 </div>
                 <?php

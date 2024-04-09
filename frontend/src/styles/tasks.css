@@ -81,11 +81,11 @@ input[type=date] {
     transition: 0.2s;
 }
 
-input[type=date]:hover{
+input[type=date]:hover {
     background: #F3F3F3;
 }
 
-select:hover{
+select:hover {
     background: #F3F3F3;
 }
 
@@ -156,7 +156,7 @@ input[type=date]:hover {
     transition: 0.2s;
 }
 
-.button-secondary:hover{
+.button-secondary:hover {
     background: #F3F3F3;
 }
 
@@ -179,7 +179,7 @@ input[type="color"] {
     transition: 0.2s;
 }
 
-input[type="color"]:hover{
+input[type="color"]:hover {
     background: #F3F3F3;
 }
 
@@ -197,7 +197,6 @@ button {
 button:hover {
     background: #F3F3F3;
 }
-
 
 
 .custom-color-picker {
@@ -276,6 +275,18 @@ button:hover {
     animation: spin 1s linear infinite;
 }
 
+.loader-gray {
+    margin-left: auto;
+    border: 4px solid transparent; /* Light grey */
+    border-top: 4px solid #868686; /* Blue */
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    animation: spin 1s linear infinite;
+    align-self: center;
+    margin-right: 20px;
+}
+
 .loader-success {
     margin-left: auto;
     width: 20px;
@@ -291,6 +302,10 @@ button:hover {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

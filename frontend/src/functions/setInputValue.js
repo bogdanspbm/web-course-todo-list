@@ -11,34 +11,36 @@ export async function setInputValue(input, key) {
     failedProcess.style.display = "none";
 
     try {
+        const body = new URLSearchParams();
+        body.append('uid', uid);
+        body.append('key', key);
+        body.append('value', value);
+        body.append('idToken', getCookie('idToken'));
+
         const response = await fetch('https://todo.madzhuga.com/api/postgres/rest/update_field.php', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `uid=${uid}&key=${key}&value=${encodeURIComponent(value)}&idToken=${encodeURIComponent(getCookie('idToken'))}`
+            body: body
         });
 
         if (!response.ok) {
-            process.style.display = "none";
-            successProcess.style.display = "none";
-            failedProcess.style.display = undefined;
             throw new Error('Request failed with status ' + response.status);
         }
 
         const data = await response.json();
+
         if (!data.success) {
-            process.style.display = "none";
-            successProcess.style.display = "none";
-            failedProcess.style.display = "block";
             throw new Error(data.message);
         }
 
-        // Обновление поля выполнено успешно
+        // Update successful
         process.style.display = "none";
         successProcess.style.display = "block";
         failedProcess.style.display = "none";
     } catch (error) {
+        console.error(error);
         process.style.display = "none";
         successProcess.style.display = "none";
         failedProcess.style.display = "block";
@@ -52,7 +54,6 @@ function getInputValue(input) {
         return input.value;
     }
 }
-
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;

@@ -14,10 +14,13 @@ export function bindTaskForm() {
             addTaskButton.style.display = "flex";
         });
     }
-    addTaskButton.addEventListener("click", () => {
-        form.style.display = "flex";
-        addTaskButton.style.display = "none"
-        uidPlate.value = generateUID();
-    });
+
+    if (addTaskButton) {
+        addTaskButton.addEventListener("click", () => {
+            form.style.display = "flex";
+            addTaskButton.style.display = "none"
+            uidPlate.value = generateUID();
+        });
+    }
 
 }

@@ -43,9 +43,15 @@
                            placeholder="Название задачи">
 
                 </div>
-                <textarea name="desc" id="desc" maxLength="200" style="height: 14px"
+                <div class="horizontal-container" style="height: fit-content">
+                <textarea style="width: 100%; height: 14px;" name="desc" id="desc" maxLength="200" style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                           class="desc-input invisible-input" placeholder="Описание"></textarea>
+                    <div class="file-container">
+                        <div id="upload-file-button" class="upload-file-button" onclick="document.getElementById('file-input').click()">+ Добавить файл </div>
+                        <input id="file-input" hidden="hidden" type="file" name="file" onchange="document.uploadFile(this)">
+                    </div>
+                </div>
                 <input name="task-uid" type="hidden" id="task-uid" value="none">
             </div>
             <div class="new-task-footer">

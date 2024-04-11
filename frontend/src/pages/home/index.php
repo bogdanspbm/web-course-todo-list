@@ -1,7 +1,7 @@
 <?php
-require_once 'api/postgres/lib/get_tasks.inc';
-require_once 'api/redis/lib/get_task_completion.inc';
-require_once 'api/libs/date_lib.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/postgres/lib/get_tasks.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/redis/lib/get_task_completion.inc';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/libs/date_lib.inc';
 
 if (!isset($_COOKIE['email'])) {
     if (isset($_COOKIE['idToken'])) {
@@ -62,7 +62,8 @@ $dates = [];
         <div class="add-task-button"><img alt="Создать" class="nav-icon" src="../../resources/icons/ic_add_24x24.svg">
             Добавить задачу
         </div>
-        <form id="task-create-form" action="/api/postgres/redirect/create_task.php" method="POST" style="display: none;"
+        <form enctype="multipart/form-data" id="task-create-form" action="/api/postgres/redirect/create_task.php"
+              method="POST" style="display: none;"
               class="new-task">
             <div class="new-task-container">
                 <div class="horizontal-container">
@@ -78,10 +79,18 @@ $dates = [];
                          class="loader-failed"
                          id="progress-loader-failed">
                 </div>
-                <textarea onfocusout="document.setInputValue(this, 'description')" name="desc" id="desc" maxLength="200"
-                          style="height: 14px"
+                <div class="horizontal-container" style="height: fit-content">
+                <textarea style="width: 100%; height: 14px;" name="desc" id="desc" maxLength="200" style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                           class="desc-input invisible-input" placeholder="Описание"></textarea>
+                    <div class="file-container">
+                        <div id="upload-file-button" class="upload-file-button"
+                             onclick="document.getElementById('file-input').click()">+ Добавить файл 
+                        </div>
+                        <input id="file-input" hidden="hidden" type="file" name="file"
+                               onchange="document.uploadFile(this)">
+                    </div>
+                </div>
                 <input name="task-uid" type="hidden" id="task-uid" value="none">
             </div>
             <div class="new-task-footer">

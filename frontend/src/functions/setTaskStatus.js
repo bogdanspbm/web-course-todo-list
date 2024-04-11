@@ -6,7 +6,7 @@ export async function setTaskStatus(checkbox, uid) {
 
     try {
         const response = await fetch('https://todo.madzhuga.com/api/redis/rest/set_task_completion.php', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },

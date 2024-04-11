@@ -1,6 +1,6 @@
 <?php
-require_once 'api/postgres/lib/get_drafts.inc';
-require_once 'api/libs/date_lib.inc';
+require_once  $_SERVER['DOCUMENT_ROOT'] . '/api/postgres/lib/get_drafts.inc';
+require_once  $_SERVER['DOCUMENT_ROOT'] . '/api/libs/date_lib.inc';
 
 if (!isset($_COOKIE['email'])) {
     if (isset($_COOKIE['idToken'])) {

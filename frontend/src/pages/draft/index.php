@@ -82,7 +82,7 @@ $dates = [];
                                                                 src="resources/icons/ic_edit_24x24.svg"></a>
                             <div class="task-control-button" onclick="document.deleteTask('<?php echo $task['uid']; ?>')"><img alt="Удалить" class="nav-icon"
                                                                                                                                src="resources/icons/ic_delete_24x24.svg"></div>
-                            <div class="task-control-button"><img alt="Опубликовать" class="nav-icon"
+                            <div class="task-control-button" onclick="document.publishTask('<?php echo $task['uid']; ?>')"><img alt="Опубликовать" class="nav-icon"
                                                                 src="resources/icons/ic_bookmark_add_24x24.svg"></div>
                         </div>
                         <div style="display: none" class="loader-gray" id="progress-loader-<?php echo $task['uid']; ?>"></div>

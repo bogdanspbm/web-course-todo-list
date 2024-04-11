@@ -17,7 +17,7 @@ nav {
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    padding: 8px;
+    padding: 4px;
     width: calc(100% - 16px);
     border-radius: 8px;
     max-height: 32px;
@@ -78,6 +78,7 @@ nav:hover:not(.selected) {
     display: flex;
     flex-direction: row;
     gap: 8px;
+    padding: 4px;
     width: 100%;
     color: #242424;
     text-decoration: none;

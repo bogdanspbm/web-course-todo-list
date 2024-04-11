@@ -38,8 +38,11 @@
         <form id="task-create-form" action="/api/redis/create_task.php" method="POST" style="display: none;"
               class="new-task">
             <div class="new-task-container">
-                <input name="title" id="title" class="title-input invisible-input" type="text"
-                       placeholder="Название задачи">
+                <div class="horizontal-container">
+                    <input name="title" id="title" class="title-input invisible-input" type="text"
+                           placeholder="Название задачи">
+
+                </div>
                 <textarea name="desc" id="desc" maxLength="200" style="height: 14px"
                           oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                           class="desc-input invisible-input" placeholder="Описание"></textarea>
@@ -63,15 +66,19 @@
         <div class="horizontal-container" style="align-items: center; gap: 8px">
             <div class="checkbox-wrapper">
                 <div class="round">
-                    <input type="checkbox" id="checkbox-a" />
+                    <input type="checkbox" id="checkbox-a"/>
                     <label for="checkbox"></label>
                 </div>
             </div>
             <div class="new-task">
                 <div class="new-task-container">
-                    <input readonly name="title" class="title-input invisible-input" type="text"
-                           value="<?php echo $task['title']; ?>"
-                           placeholder="Название задачи">
+                    <div class="horizontal-container">
+                        <input readonly name="title" class="title-input invisible-input" type="text"
+                               value="<?php echo $task['title']; ?>"
+                               placeholder="Название задачи">
+                        <img alt="Выйти" class="nav-icon"
+                             src="../../resources/icons/ic_mid_priority_24x24.svg">
+                    </div>
                     <textarea readonly name="desc" maxLength="200" style="height: 14px"
                               oninput='this.style.height = (this.value.split("\n").length * 14) + "px"'
                               class="desc-input invisible-input"
@@ -83,7 +90,7 @@
         <div class="horizontal-container" style="align-items: center; gap: 8px">
             <div class="checkbox-wrapper">
                 <div class="round">
-                    <input type="checkbox" id="checkbox-b" />
+                    <input type="checkbox" id="checkbox-b"/>
                     <label for="checkbox"></label>
                 </div>
             </div>
@@ -100,8 +107,10 @@
                     <input readonly name="task-uid" type="hidden" value="none">
                 </div>
                 <div class="task-control">
-                    <a class="task-control-button"><img alt="Редактировать" class="nav-icon" src="../../resources/icons/ic_edit_24x24.svg"></a>
-                    <a class="task-control-button"><img alt="Удалить" class="nav-icon" src="../../resources/icons/ic_delete_24x24.svg"></a>
+                    <a class="task-control-button"><img alt="Редактировать" class="nav-icon"
+                                                        src="../../resources/icons/ic_edit_24x24.svg"></a>
+                    <a class="task-control-button"><img alt="Удалить" class="nav-icon"
+                                                        src="../../resources/icons/ic_delete_24x24.svg"></a>
                 </div>
             </div>
         </div>

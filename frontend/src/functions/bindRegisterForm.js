@@ -85,17 +85,19 @@ export function bindRegisterForm() {
             if (!email || !email.includes("@") || !email.split("@")[0] || !email.split("@")[1].includes(".")) {
                 emailInput.style.outline = "1px solid #f5222d";
                 emailInput.style.color = "#cf1322";
+                document.getElementById("email-sup").innerText = "Неверный формат почты";
                 document.getElementById("email-sup").style.color = "#cf1322";
                 return;
             }
 
             if (email) {
-                fetch(`/api/redis/check_registration.php?email=${email}`)
+                fetch(`/api/redis/rest/check_registration.php?email=${email}`)
                     .then(response => response.json())
                     .then(data => {
                         if (data.registered) {
                             emailInput.style.outline = "1px solid #f5222d";
                             emailInput.style.color = "#cf1322";
+                            document.getElementById("email-sup").innerText = "Почта уже занята";
                             document.getElementById("email-sup").style.color = "#cf1322";
                         } else {
                             emailInput.style.outline = "1px solid #52c41a";

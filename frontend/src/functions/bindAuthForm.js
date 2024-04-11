@@ -50,12 +50,12 @@ export function bindAuthForm() {
                 emailInput.style.color = "#242424";
                 document.getElementById("email-sup").style.color = "#cf132200";
                 return;
-
             }
 
             if (!email || !email.includes("@") || !email.split("@")[0] || !email.split("@")[1].includes(".")) {
                 emailInput.style.outline = "1px solid #f5222d";
                 emailInput.style.color = "#cf1322";
+                document.getElementById("email-sup").innerText = "Неверный формат почты"
                 document.getElementById("email-sup").style.color = "#cf1322";
                 return;
             }

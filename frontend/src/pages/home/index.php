@@ -143,7 +143,7 @@ $dates = [];
                     <div class="new-task-horizontal">
                         <div class="color-flag"
                              style="border: 1px solid <?php echo $task['color'] != "" && isset($task['color']) ? $task['color'] : "#FFFFFF"; ?>; background: <?php echo $task['color'] != "" && isset($task['color']) ? $task['color'] : "#FFFFFF"; ?> ;border-right-color: #F0F0F0;"></div>
-                        <div class="new-task-container">
+                        <a href="/view?uid=<?php echo $task['uid']; ?>" class="ready-task-container">
                             <input readonly name="title" class="title-input invisible-input" type="text"
                                    value="<?php echo $task['title']; ?>"
                                    placeholder="Название задачи">
@@ -152,7 +152,7 @@ $dates = [];
                                       class="desc-input invisible-input"
                                       placeholder="Описание"><?php echo $task['description']; ?></textarea>
                             <input readonly type="hidden" value="none">
-                        </div>
+                        </a>
                         <div class="task-control" id="task-control-<?php echo $task['uid']; ?>">
                             <div class="task-control-button"
                                  onclick="document.deleteTask('<?php echo $task['uid']; ?>')"><img alt="Удалить"

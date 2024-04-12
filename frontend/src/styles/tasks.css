@@ -40,6 +40,19 @@
     gap: 6px;
 }
 
+.ready-task-container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+
+    padding: 12px;
+
+    cursor: pointer;
+
+    gap: 6px;
+}
+
 .new-task-footer {
     display: flex;
     flex-direction: row;

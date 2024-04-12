@@ -47,6 +47,7 @@ $routes = [
     'login' => '/login/index.php',
     'edit' => '/edit/index.php',
     'draft' => '/draft/index.php',
+    'view' => '/view/index.php'
     // Добавьте другие маршруты здесь
 ];
 

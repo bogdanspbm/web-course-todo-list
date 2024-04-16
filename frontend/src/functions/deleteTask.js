@@ -7,12 +7,17 @@ export async function deleteTask(uid) {
     loader.style.display = 'block';
 
     try {
+
+        const body = new URLSearchParams();
+        body.append('uid', uid);
+        body.append('idToken', getCookie('idToken'));
+
         const response = await fetch('https://todo.madzhuga.com/api/postgres/rest/delete_task.php', {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `uid=${uid}&idToken=${encodeURIComponent(getCookie('idToken'))}`
+            body: body
         });
 
         if (!response.ok) {

@@ -340,6 +340,7 @@ button:hover {
     line-height: 12px;
     font-size: 12px;
     color: #52c41a;
+    overflow-x: hidden;
 }
 
 .remove-file-button {

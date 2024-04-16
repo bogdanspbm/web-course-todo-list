@@ -87,7 +87,7 @@ $dates = [];
                           placeholder="Описание"><?php echo $task['description']; ?></textarea>
                     <div class="file-container">
                         <div id="upload-file-button" class="upload-file-button"
-                             onclick="document.getElementById('file-input').click()">+ Добавить файл 
+                             onclick="document.getElementById('file-input').click()"><?php  echo isset($task['file_name']) && $task['file_name'] != "" ?  $task['file_name'] : '+ Добавить файл '; ?>
                         </div>
                         <input id="file-input" hidden="hidden" type="file" name="file"
                                onchange="document.uploadFile(this)">

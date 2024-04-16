@@ -18,7 +18,7 @@ export async function setInputValue(input, key) {
         body.append('idToken', getCookie('idToken'));
 
         const response = await fetch('https://todo.madzhuga.com/api/postgres/rest/update_field.php', {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },

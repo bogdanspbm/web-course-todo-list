@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/api/firebase/lib/check_token.inc';
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: PUT');
+header('Access-Control-Allow-Methods: PATCH');
 
 
 $token = isset($_COOKIE['idToken']) ? $_COOKIE['idToken'] : '';
